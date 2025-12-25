@@ -1,7 +1,23 @@
-export default function Home() {
+import HeroSection from "./components/hero/HeroSection";
+import ProblemsSection from "./components/problems/ProblemsSection";
+import ServicesSection from "./components/services/ServicesSection";
+import StrengthsSection from "./components/strengths/StrengthsSection";
+import WorksSection from "./components/works/WorksSection";
+import PricingSection from "./components/pricing/PricingSection";
+import AboutSection from "./components/about/AboutSection";
+import ContactSection from "./components/contact/ContactSection";
+
+export default function HomePage() {
   return (
-    <main style={{ padding: "40px", fontSize: "24px" }}>Hello World 🚀 from CI/CD</main>
+    <main className="space-y-32">
+      <HeroSection />
+      <ProblemsSection />
+      <ServicesSection />
+      <StrengthsSection />
+      <WorksSection />
+      <PricingSection />
+      <AboutSection />
+      <ContactSection />
+    </main>
   );
 }
-
-

@@ -1,17 +1,20 @@
 import ContactForm from "@/app/components/contact/ContactForm";
+import { Box, Typography } from "@mui/material";
 
 export default function ContactPage() {
   return (
-    <section className="py-24 space-y-8">
-      <h1 className="text-3xl font-bold text-center">お問い合わせ</h1>
+    <Box sx={{ py: 10 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        お問い合わせ
+      </Typography>
 
-      <p className="text-center text-gray-600">
+      <Typography align="center" color="text.secondary" sx={{ mb: 6 }}>
         ご相談だけでも問題ありません。
         <br />
         お気軽にご連絡ください。
-      </p>
+      </Typography>
 
       <ContactForm />
-    </section>
+    </Box>
   );
 }

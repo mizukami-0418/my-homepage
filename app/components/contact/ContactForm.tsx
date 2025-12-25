@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { submitContact } from "@/app/actions/contact";
+import { Box, Button, TextField, Alert } from "@mui/material";
 
-// Contact form component
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ export default function ContactForm() {
     const result = await submitContact(formData);
 
     if (!result.success) {
-      setError(result.error ?? "エラーが発生しました");
+      setError(result.error ?? "送信に失敗しました");
       setStatus("error");
       return;
     }
@@ -22,42 +22,48 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <p className="text-center text-green-600">
-        お問い合わせありがとうございました。
-      </p>
+      <Alert severity="success">
+        お問い合わせありがとうございました。後ほどご連絡いたします。
+      </Alert>
     );
   }
 
   return (
-    <form action={action} className="space-y-6 max-w-md mx-auto">
-      <input
-        name="name"
-        placeholder="お名前"
-        className="w-full border p-3 rounded"
-        required
-      />
+    <Box
+      component="form"
+      action={action}
+      sx={{
+        maxWidth: 500,
+        mx: "auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+      }}
+    >
+      <TextField name="name" label="お名前" fullWidth required />
 
-      <input
+      <TextField
         name="email"
+        label="メールアドレス"
         type="email"
-        placeholder="メールアドレス"
-        className="w-full border p-3 rounded"
+        fullWidth
         required
       />
 
-      <textarea
+      <TextField
         name="message"
-        placeholder="お問い合わせ内容"
+        label="お問い合わせ内容"
+        multiline
         rows={5}
-        className="w-full border p-3 rounded"
+        fullWidth
         required
       />
 
-      {status === "error" && <p className="text-red-500 text-sm">{error}</p>}
+      {status === "error" && <Alert severity="error">{error}</Alert>}
 
-      <button type="submit" className="w-full bg-black text-white py-3 rounded">
+      <Button type="submit" variant="contained" size="large">
         送信する
-      </button>
-    </form>
+      </Button>
+    </Box>
   );
 }

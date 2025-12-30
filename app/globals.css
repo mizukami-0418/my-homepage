@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #111827; /* gray-900 */
+  --foreground: #111827;
 }
 
 @theme inline {
@@ -12,11 +12,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* ダークモードは後回しでOK（まず白を完成させる） */
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #e5e7eb;
+    --foreground: #0a0a0a;
+    --background: #e5e7eb;
   }
 }
 

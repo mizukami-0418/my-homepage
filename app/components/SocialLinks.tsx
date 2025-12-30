@@ -7,7 +7,7 @@ export default function SocialLinks() {
   const socials = [
     {
       label: "GitHub",
-      href: "https://github.com/your-account",
+      href: "https://github.com/mizukami-0418",
       icon: <GitHubIcon fontSize="large" />,
     },
     {
@@ -17,7 +17,7 @@ export default function SocialLinks() {
     },
     {
       label: "Qiita",
-      href: "https://qiita.com/your-account",
+      href: "https://qiita.com/toamoku-20220418",
       icon: <ArticleIcon fontSize="large" />,
     },
   ];
@@ -28,7 +28,7 @@ export default function SocialLinks() {
         display: "flex",
         justifyContent: "center",
         gap: 3,
-        mt: 4,
+        mb: 6,
       }}
     >
       {socials.map((s) => (

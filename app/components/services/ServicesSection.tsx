@@ -17,7 +17,7 @@ const services: Service[] = [
   {
     title: "Webアプリ開発",
     description: ["業務管理ツール", "フォーム・データ管理", "API連携アプリ"],
-    tech: "Django / Django REST Framework / Supabase",
+    tech: "Django / Django REST Framework / Supabase / Vercel / Docker / Heroku",
   },
   {
     title: "改修・保守・技術サポート",

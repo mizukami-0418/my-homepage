@@ -86,7 +86,7 @@ export default function ContactForm() {
       >
         送信する
       </Button>
-      <Link href="/" className="text-center text-blue-600 hover:underline">
+      <Link href="/" className="text-center hover:underline">
         トップページに戻る
       </Link>
     </Box>

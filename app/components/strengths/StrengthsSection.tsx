@@ -5,16 +5,18 @@ const strengths = [
   "専門用語を使わない丁寧なコミュニケーション",
 ];
 
+import {
+  SectionSplit,
+  SectionText,
+  SectionImage,
+} from "@/app/components/layout/SectionSplit";
+
 export default function StrengthsSection() {
   return (
-    <section className="space-y-8">
-      <h2 className="text-2xl font-bold text-center">選ばれる理由</h2>
-
-      <ul className="max-w-xl mx-auto space-y-3">
-        {strengths.map((strength) => (
-          <li key={strength}>・{strength}</li>
-        ))}
-      </ul>
-    </section>
+    <SectionSplit
+      reverse={true}
+      left={<SectionText title="選ばれる理由" list={strengths} />}
+      right={<SectionImage src="/images/strengths-image.jpg" alt="Strengths" />}
+    />
   );
 }

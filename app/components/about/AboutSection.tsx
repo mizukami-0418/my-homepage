@@ -1,17 +1,25 @@
+import {
+  SectionSplit,
+  SectionText,
+  SectionImage,
+} from "@/app/components/layout/SectionSplit";
+
 export default function AboutSection() {
   return (
-    <section className="space-y-6 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold text-center">About Me</h2>
-
-      <p>
-        Webエンジニアとして、フロントエンドからバックエンドまで
-        幅広く学習・開発を行っています。
-      </p>
-
-      <p>
-        技術で人の役に立つことを大切にし、
-        小さな改善でも価値を提供できる開発を心がけています。
-      </p>
-    </section>
+    <SectionSplit
+      reverse={true}
+      left={
+        <SectionText
+          title="About Me"
+          description={[
+            "「PASSION LED US HERE. 情熱が私たちをここに導いた」",
+            "TAMK Web Studio は、Webを通じて人の役に立ちたいという情熱から生まれた小さな Web スタジオです。",
+            "個人で制作を行っているからこそ、ご相談から公開後のサポートまで、一貫して丁寧に対応しています。",
+            "技術だけでなく、「安心して任せられる存在」であることを大切に。小さなスタジオから、確かな信頼をお届けします。",
+          ]}
+        />
+      }
+      right={<SectionImage src="/images/about-image.jpg" alt="About Me" />}
+    />
   );
 }

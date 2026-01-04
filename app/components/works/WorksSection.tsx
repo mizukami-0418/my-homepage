@@ -1,35 +1,3 @@
-// export default function WorksSection() {
-//   return (
-//     <section className="space-y-8">
-//       <h2 className="text-2xl font-bold text-center">制作実績</h2>
-
-//       <div className="max-w-xl mx-auto border p-6 rounded-lg space-y-4">
-//         <h3 className="font-semibold">Webアプリ（個人開発）</h3>
-
-//         <p className="text-gray-700">
-//           ユーザー管理・データ登録ができるWebアプリ
-//         </p>
-
-//         <p className="text-sm text-gray-500">
-//           React / Django REST Framework / Docker
-//         </p>
-
-//         <div className="flex gap-4">
-//           <a href="https://flashcard.toamoku.net" className="underline">
-//             単語帳アプリ
-//           </a>
-//           <a href="https://the-wild-oasis.toamoku.net" className="underline">
-//             架空宿泊施設予約管理アプリ
-//           </a>
-//           <a href="https://pizzalu.toamoku.net" className="underline">
-//             架空ピザ屋さんの注文管理アプリ
-//           </a>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import {
@@ -48,7 +16,7 @@ import { works } from "./worksData";
 
 export default function WorksSection() {
   return (
-    <Box sx={{ maxWidth: 1200, mx: "auto", px: 2, py: 10 }}>
+    <Box sx={{ maxWidth: 1200, mx: "auto", px: 2 }}>
       {/* Section Title */}
       <Typography
         variant="h4"

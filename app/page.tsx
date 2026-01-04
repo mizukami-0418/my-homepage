@@ -14,18 +14,17 @@ export default function HomePage() {
     <main className="space-y-24">
       <HeroSection />
       <Container
-      maxWidth="lg"
-      sx={{ display: "flex", flexDirection: "column", gap: 12 }}
-    >
-
-      <ProblemsSection />
-      <ServicesSection />
-      <StrengthsSection />
-      <WorksSection />
-      <PricingSection />
-      <AboutSection />
-      <ContactSection />
-      <SocialLinks />
+        maxWidth="lg"
+        sx={{ display: "flex", flexDirection: "column", gap: 12 }}
+      >
+        <ProblemsSection />
+        <ServicesSection />
+        <StrengthsSection />
+        <WorksSection />
+        <PricingSection />
+        <AboutSection />
+        <ContactSection />
+        <SocialLinks />
       </Container>
     </main>
   );

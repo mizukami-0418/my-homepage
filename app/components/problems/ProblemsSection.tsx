@@ -5,20 +5,19 @@ const problems = [
   "技術的な相談をできる相手がいない",
 ];
 
+import {
+  SectionSplit,
+  SectionText,
+  SectionImage,
+} from "@/app/components/layout/SectionSplit";
+
 export default function ProblemsSection() {
   return (
-    <section className="space-y-8">
-      <h2 className="text-2xl font-bold text-center">
-        こんなお悩みはありませんか？
-      </h2>
-
-      <ul className="max-w-xl mx-auto space-y-3">
-        {problems.map((problem, index) => (
-          <li key={index} className="text-gray-700">
-            ・{problem}
-          </li>
-        ))}
-      </ul>
-    </section>
+    <SectionSplit
+      left={
+        <SectionText title="こんなお悩みはありませんか？" list={problems} />
+      }
+      right={<SectionImage src="/images/problem-image.jpg" alt="Problems" />}
+    />
   );
 }

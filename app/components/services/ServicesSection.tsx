@@ -32,7 +32,7 @@ const services: Service[] = [
 
 export default function ServicesSection() {
   return (
-    <section className="space-y-12">
+    <section id="skills" className="space-y-12">
       <h2 className="text-2xl font-bold text-center">提供サービス</h2>
 
       <div className="grid gap-8 md:grid-cols-3">
@@ -46,11 +46,11 @@ export default function ServicesSection() {
               ))}
             </ul>
 
-            {service.tech && (
+            {/* {service.tech && (
               <p className="mt-4 text-sm text-gray-500">
                 使用技術：{service.tech}
               </p>
-            )}
+            )} */}
           </div>
         ))}
       </div>

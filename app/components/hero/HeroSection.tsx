@@ -32,7 +32,7 @@ export default function HeroSection() {
               color: "#1e293b",
             }}
           >
-            TAMK Web Studio
+            tomo Web Studio
           </Typography>
 
           <Typography

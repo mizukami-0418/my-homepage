@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import ArticleIcon from "@mui/icons-material/Article";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 export default function SocialLinks() {
   const socials = [
@@ -16,9 +16,9 @@ export default function SocialLinks() {
       icon: <TwitterIcon fontSize="large" />,
     },
     {
-      label: "Qiita",
-      href: "https://qiita.com/toamoku-20220418",
-      icon: <ArticleIcon fontSize="large" />,
+      label: "Facebook",
+      href: "https://www.facebook.com/your-account",
+      icon: <FacebookIcon fontSize="large" />,
     },
   ];
 
@@ -26,9 +26,8 @@ export default function SocialLinks() {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "left",
         gap: 3,
-        mb: 6,
       }}
     >
       {socials.map((s) => (
@@ -39,6 +38,7 @@ export default function SocialLinks() {
             flexDirection: "column",
             alignItems: "center",
             gap: 0.5,
+            mt: 2,
           }}
         >
           <IconButton
@@ -46,6 +46,8 @@ export default function SocialLinks() {
             href={s.href}
             target="_blank"
             aria-label={s.label}
+            color="inherit"
+            className="color-foreground"
           >
             {s.icon}
           </IconButton>

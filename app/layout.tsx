@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,8 +20,8 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "TAMK Web Studio",
-  description: "フリーランスWebデベロッパー、TAMKのポートフォリオサイト",
+  title: "tomo Web Studio",
+  description: "フリーランスWebデベロッパー、tomoのポートフォリオサイト",
 };
 
 export default function RootLayout({
@@ -30,9 +32,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased`}
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          ${dancingScript.variable}
+          antialiased
+          bg-background
+          text-foreground
+          `}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import { Button, Link } from "@mui/material";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="text-center space-y-6">
+    <section id="contact" className="text-center space-y-6 mb-16">
       <h2 className="text-2xl font-bold">お問い合わせ</h2>
 
       <p className="text-gray-600">

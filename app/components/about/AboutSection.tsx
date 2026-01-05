@@ -6,20 +6,23 @@ import {
 
 export default function AboutSection() {
   return (
-    <SectionSplit
-      reverse={true}
-      left={
-        <SectionText
-          title="About Me"
-          description={[
-            "「PASSION LED US HERE. 情熱が私たちをここに導いた」",
-            "TAMK Web Studio は、Webを通じて人の役に立ちたいという情熱から生まれた小さな Web スタジオです。",
-            "個人で制作を行っているからこそ、ご相談から公開後のサポートまで、一貫して丁寧に対応しています。",
-            "技術だけでなく、「安心して任せられる存在」であることを大切に。小さなスタジオから、確かな信頼をお届けします。",
-          ]}
-        />
-      }
-      right={<SectionImage src="/images/about-image.jpg" alt="About Me" />}
-    />
+    <div id="about">
+      <SectionSplit
+        reverse={true}
+        left={
+          <SectionText
+            title="About Me"
+            description={[
+              "tomo ― 友達のように、共に歩む Web スタジオ",
+              "tomo Web Studio の tomo には、「友達」と「共に」という二つの意味があります。",
+              "お客様にとって、気軽に相談でき、安心して任せられる存在であること。",
+              "そして、目的や想いを共有しながら、一緒に作り上げていくこと。それが私たちの願いです。",
+              "小さなスタジオだからこそできる、丁寧で誠実な対応を大切にし、確かな信頼をお届けします。",
+            ]}
+          />
+        }
+        right={<SectionImage src="/images/about-image.png" alt="About Me" />}
+      />
+    </div>
   );
 }

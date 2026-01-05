@@ -9,7 +9,10 @@ import {
   Alert,
   useTheme,
   useMediaQuery,
+  Stack,
+  Typography,
 } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Link from "next/link";
 
 export default function ContactForm() {
@@ -33,14 +36,58 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <>
-        <Alert severity="success">
-          お問い合わせありがとうございます。 自動返信メールをお送りしました。
-        </Alert>
-        <Link href="/" style={{ textDecoration: "none" }}>
-          トップページに戻る
-        </Link>
-      </>
+      <Box
+        sx={{
+          minHeight: "50vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          px: 2,
+        }}
+      >
+        <Stack
+          spacing={3}
+          sx={{
+            maxWidth: 480,
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          {/* 成功メッセージ */}
+          <Alert
+            severity="success"
+            icon={<CheckCircleIcon fontSize="inherit" />}
+            sx={{
+              fontSize: "0.95rem",
+              borderRadius: 2,
+            }}
+          >
+            <Typography fontWeight="bold" gutterBottom>
+              送信が完了しました 🎉
+            </Typography>
+            <Typography variant="body2">
+              お問い合わせありがとうございます。
+              <br />
+              自動返信メールをお送りしました。
+            </Typography>
+          </Alert>
+
+          {/* トップへ戻るボタン */}
+          <Button
+            component={Link}
+            href="/"
+            variant="contained"
+            size="large"
+            sx={{
+              borderRadius: 999,
+              textTransform: "none",
+              fontWeight: "bold",
+            }}
+          >
+            トップページに戻る
+          </Button>
+        </Stack>
+      </Box>
     );
   }
 
@@ -57,7 +104,32 @@ export default function ContactForm() {
         gap: 3,
       }}
     >
-      <TextField name="name" label="お名前" fullWidth required />
+      <TextField
+        name="name"
+        label="お名前"
+        fullWidth
+        required
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            color: "hsl(var(--foreground))",
+            "& fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&:hover fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "hsl(var(--foreground))",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "hsl(var(--foreground))",
+          },
+        }}
+      />
 
       <TextField
         name="email"
@@ -65,6 +137,26 @@ export default function ContactForm() {
         type="email"
         fullWidth
         required
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            color: "hsl(var(--foreground))",
+            "& fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&:hover fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "hsl(var(--foreground))",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "hsl(var(--foreground))",
+          },
+        }}
       />
 
       <TextField
@@ -74,6 +166,26 @@ export default function ContactForm() {
         rows={isMobile ? 4 : 6}
         fullWidth
         required
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            color: "hsl(var(--foreground))",
+            "& fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&:hover fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "hsl(var(--foreground))",
+            },
+          },
+          "& .MuiInputLabel-root": {
+            color: "hsl(var(--foreground))",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "hsl(var(--foreground))",
+          },
+        }}
       />
 
       {status === "error" && <Alert severity="error">{error}</Alert>}
@@ -86,9 +198,19 @@ export default function ContactForm() {
       >
         送信する
       </Button>
-      <Link href="/" className="text-center hover:underline">
+      <Button
+        component={Link}
+        href="/"
+        variant="contained"
+        size="large"
+        sx={{
+          borderRadius: 999,
+          textTransform: "none",
+          fontWeight: "bold",
+        }}
+      >
         トップページに戻る
-      </Link>
+      </Button>
     </Box>
   );
 }

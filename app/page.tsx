@@ -6,7 +6,6 @@ import WorksSection from "./components/works/WorksSection";
 import PricingSection from "./components/pricing/PricingSection";
 import AboutSection from "./components/about/AboutSection";
 import ContactSection from "./components/contact/ContactSection";
-import SocialLinks from "./components/SocialLinks";
 import { Container } from "@mui/material";
 
 export default function HomePage() {
@@ -24,7 +23,6 @@ export default function HomePage() {
         <PricingSection />
         <AboutSection />
         <ContactSection />
-        <SocialLinks />
       </Container>
     </main>
   );

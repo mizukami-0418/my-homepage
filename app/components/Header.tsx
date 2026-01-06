@@ -12,49 +12,6 @@ const sections = [
   { label: "Contact", href: "#contact" },
 ];
 
-// export function Header() {
-//   const [isDark, setIsDark] = useState(() => {
-//     if (typeof window !== "undefined") return false;
-//     return localStorage.getItem("theme") === "dark";
-//   });
-
-//   const [menuOpen, setMenuOpen] = useState(false);
-//   const [active, setActive] = useState<string | null>(null);
-
-//   useEffect(() => {
-//     const html = document.documentElement;
-//     html.classList.toggle("dark", isDark);
-//   }, [isDark]);
-
-//   const toggleTheme = () => {
-//     setIsDark((prev) => {
-//       const newTheme = !prev;
-//       localStorage.setItem("theme", newTheme ? "dark" : "light");
-//       return newTheme;
-//     });
-//   };
-
-//   // 現在セクション検知
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       (entries) => {
-//         entries.forEach((entry) => {
-//           if (entry.isIntersecting) {
-//             setActive(entry.target.id);
-//           }
-//         });
-//       },
-//       { rootMargin: "-40% 0px -50% 0px" }
-//     );
-
-//     sections.forEach((s) => {
-//       const el = document.getElementById(s.href.replace("#", ""));
-//       if (el) observer.observe(el);
-//     });
-
-//     return () => observer.disconnect();
-//   }, []);
-
 export function Header() {
   const [isDark, setIsDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);

@@ -8,7 +8,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 grid gap-8 md:grid-cols-4 text-center">
         {/* Brand */}
         <div className="flex flex-col items-center">
-          <Link href="#" className="flex justify-center gap-2">
+          <Link href="/" className="flex justify-center gap-2">
             <Image
               src="/images/corporate-logo.png"
               alt="logo"

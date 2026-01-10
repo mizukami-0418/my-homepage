@@ -8,6 +8,7 @@ import AboutSection from "./components/about/AboutSection";
 import ContactSection from "./components/contact/ContactSection";
 import { Container } from "@mui/material";
 import { BlogLink } from "./components/blog/BlogLink";
+import { TargetAudienceSection } from "./components/audience/TargetAudienceSection";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
         maxWidth="lg"
         sx={{ display: "flex", flexDirection: "column", gap: 12 }}
       >
+        <TargetAudienceSection />
         <ProblemsSection />
         <AboutSection />
         <ServicesSection />

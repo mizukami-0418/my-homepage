@@ -9,6 +9,8 @@ export default function ContactSection() {
         ご相談だけでも問題ありません。
         <br />
         お気軽にご連絡ください。
+        <br />
+        無理な営業・契約の催促は一切ありません。
       </p>
       <Button component={Link} href="/contact" variant="contained" size="large">
         お問い合わせはこちら

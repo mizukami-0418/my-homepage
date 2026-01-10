@@ -11,7 +11,9 @@ export default function ContactPage() {
       </Typography>
 
       <Typography align="center" sx={{ mb: 6 }}>
-        ご相談だけでも問題ありません。 お気軽にご連絡ください。
+        まずはご相談だけでも大丈夫です。お気軽にご連絡ください。
+        <br />
+        「こんなこと聞いていいのかな？」という内容も歓迎です
       </Typography>
 
       <ContactForm />

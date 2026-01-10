@@ -26,7 +26,7 @@ export default function SocialLinks() {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "left",
+        justifyContent: "center",
         gap: 3,
       }}
     >

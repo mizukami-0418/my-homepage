@@ -1,10 +1,12 @@
 import { Box, Typography, Button } from "@mui/material";
+import { ReactNode } from "react";
 
 type Props = {
   title: string;
   description?: string[];
   buttonLabel?: string;
   list?: string[];
+  actions?: ReactNode;
 };
 
 export default function SectionText({
@@ -12,6 +14,7 @@ export default function SectionText({
   description,
   buttonLabel,
   list,
+  actions,
 }: Props) {
   return (
     <Box>
@@ -36,6 +39,7 @@ export default function SectionText({
       )}
 
       {buttonLabel && <Button variant="contained">{buttonLabel}</Button>}
+      {actions && <div className="pt-4">{actions}</div>}
     </Box>
   );
 }

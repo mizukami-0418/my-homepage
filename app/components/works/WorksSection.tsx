@@ -10,7 +10,6 @@ import {
   Button,
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
-import GitHubIcon from "@mui/icons-material/GitHub";
 
 import { works } from "./worksData";
 
@@ -91,24 +90,17 @@ export default function WorksSection() {
                 </Box>
               </CardContent>
               <CardActions className="text-foreground bg-background">
-                {work.github && (
-                  <Button
-                    size="small"
-                    startIcon={<GitHubIcon />}
-                    href={work.github}
-                    target="_blank"
-                  >
-                    GitHubへ
-                  </Button>
-                )}
                 {work.demo && (
                   <Button
                     size="small"
                     startIcon={<LaunchIcon />}
                     href={work.demo}
                     target="_blank"
+                    sx={{
+                      color: "var(--foreground)",
+                    }}
                   >
-                    Webサイトへ
+                    アプリケーションへ移動する
                   </Button>
                 )}
               </CardActions>

@@ -19,7 +19,6 @@ export const works: Work[] = [
       "レスポンシブ対応",
     ],
     techs: ["Python", "Django", "Heroku", "PostgreSQL"],
-    github: "https://github.com/mizukami-0418/DjangoWordProject_Version2",
     demo: "https://flashcard.toamoku.net",
   },
   {
@@ -38,7 +37,6 @@ export const works: Work[] = [
       "Tailwind CSS",
       "Vercel",
     ],
-    github: "https://github.com/mizukami-0418/the-wild-oasis-website",
     demo: "https://the-wild-oasis.toamoku.net",
   },
   {
@@ -46,7 +44,6 @@ export const works: Work[] = [
     description: "飲食店の注文受付・管理を想定した業務アプリ。",
     features: ["メニュー表示・注文作成", "注文ステータス管理", "管理画面対応"],
     techs: ["React", "JavaScript", "Vite", "Tailwind CSS"],
-    github: "https://github.com/mizukami-0418/fast-react-pizza",
     demo: "https://pizzalu.toamoku.net",
   },
 ];

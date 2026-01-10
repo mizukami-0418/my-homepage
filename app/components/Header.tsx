@@ -7,21 +7,22 @@ import { Menu, X } from "lucide-react";
 
 const sections = [
   { label: "About", href: "#about" },
-  { label: "Works", href: "#works" },
   { label: "Skills", href: "#skills" },
+  { label: "Strengths", href: "#strengths" },
+  { label: "Works", href: "#works" },
+  { label: "Price", href: "#price" },
+  { label: "Qiita Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
 export function Header() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-
-  // localStorage は必ず useEffect で
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    setIsDark(theme === "dark");
-  }, []);
 
   useEffect(() => {
     const html = document.documentElement;

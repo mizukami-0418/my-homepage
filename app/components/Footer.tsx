@@ -34,10 +34,19 @@ export function Footer() {
               <a href="#about">About</a>
             </li>
             <li>
+              <a href="#skills">Skills</a>
+            </li>
+            <li>
+              <a href="#strengths">Strengths</a>
+            </li>
+            <li>
               <a href="#works">Works</a>
             </li>
             <li>
-              <a href="#skills">Skills</a>
+              <a href="#price">Price</a>
+            </li>
+            <li>
+              <a href="#blog">Qiita Blog</a>
             </li>
             <li>
               <a href="#contact">Contact</a>

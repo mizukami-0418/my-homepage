@@ -13,10 +13,13 @@ import {
 
 export default function StrengthsSection() {
   return (
-    <SectionSplit
-      reverse={true}
-      left={<SectionText title="選ばれる理由" list={strengths} />}
-      right={<SectionImage src="/images/strengths-image.jpg" alt="Strengths" />}
-    />
+    <div id="strengths">
+      <SectionSplit
+        left={<SectionText title="選ばれる理由" list={strengths} />}
+        right={
+          <SectionImage src="/images/strengths-image.jpg" alt="Strengths" />
+        }
+      />
+    </div>
   );
 }

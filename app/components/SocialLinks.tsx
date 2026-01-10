@@ -1,14 +1,14 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 export default function SocialLinks() {
   const socials = [
     {
-      label: "GitHub",
-      href: "https://github.com/mizukami-0418",
-      icon: <GitHubIcon fontSize="large" />,
+      label: "Instagram",
+      href: "#",
+      icon: <InstagramIcon fontSize="large" />,
     },
     {
       label: "X",

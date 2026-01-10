@@ -7,6 +7,7 @@ import PricingSection from "./components/pricing/PricingSection";
 import AboutSection from "./components/about/AboutSection";
 import ContactSection from "./components/contact/ContactSection";
 import { Container } from "@mui/material";
+import { BlogLink } from "./components/blog/BlogLink";
 
 export default function HomePage() {
   return (
@@ -17,11 +18,12 @@ export default function HomePage() {
         sx={{ display: "flex", flexDirection: "column", gap: 12 }}
       >
         <ProblemsSection />
+        <AboutSection />
         <ServicesSection />
         <StrengthsSection />
         <WorksSection />
         <PricingSection />
-        <AboutSection />
+        <BlogLink />
         <ContactSection />
       </Container>
     </main>

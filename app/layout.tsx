@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
+import BlogLayoutWrapper from "./LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,9 +40,7 @@ export default function RootLayout({
           text-foreground
           `}
       >
-        <Header />
-        {children}
-        <Footer />
+        <BlogLayoutWrapper>{children}</BlogLayoutWrapper>
       </body>
     </html>
   );

@@ -109,6 +109,11 @@ export default function ContactForm() {
         label="お名前"
         fullWidth
         required
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
         sx={{
           "& .MuiOutlinedInput-root": {
             color: "hsl(var(--foreground))",
@@ -137,6 +142,11 @@ export default function ContactForm() {
         type="email"
         fullWidth
         required
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
         sx={{
           "& .MuiOutlinedInput-root": {
             color: "hsl(var(--foreground))",
@@ -166,6 +176,11 @@ export default function ContactForm() {
         rows={isMobile ? 4 : 6}
         fullWidth
         required
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
         sx={{
           "& .MuiOutlinedInput-root": {
             color: "hsl(var(--foreground))",
@@ -195,20 +210,13 @@ export default function ContactForm() {
         variant="contained"
         size={isMobile ? "medium" : "large"}
         fullWidth
-      >
-        送信する
-      </Button>
-      <Button
-        component={Link}
-        href="/"
-        variant="contained"
-        size="large"
         sx={{
-          borderRadius: 999,
-          textTransform: "none",
           fontWeight: "bold",
         }}
       >
+        送信する
+      </Button>
+      <Button component={Link} href="/" variant="contained" size="large">
         トップページに戻る
       </Button>
     </Box>

@@ -3,16 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 
 export function SimpleHeader() {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
   });
-
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -26,21 +22,6 @@ export function SimpleHeader() {
       return next;
     });
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px" }
-    );
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
@@ -70,9 +51,6 @@ export function SimpleHeader() {
 
         {/* Mobile */}
         <div className="md:hidden flex items-center gap-3">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X /> : <Menu />}
-          </button>
           <button onClick={toggleTheme}>{isDark ? "☀️" : "🌙"}</button>
         </div>
       </div>

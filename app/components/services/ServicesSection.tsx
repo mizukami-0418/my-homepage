@@ -40,17 +40,11 @@ export default function ServicesSection() {
           <div key={service.title} className="border p-6 rounded-lg">
             <h3 className="font-semibold text-lg mb-4">{service.title}</h3>
 
-            <ul className="space-y-1 text-gray-700">
+            <ul className="space-y-1 text-foreground">
               {service.description.map((item) => (
                 <li key={item}>・{item}</li>
               ))}
             </ul>
-
-            {/* {service.tech && (
-              <p className="mt-4 text-sm text-gray-500">
-                使用技術：{service.tech}
-              </p>
-            )} */}
           </div>
         ))}
       </div>

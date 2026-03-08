@@ -1,59 +1,52 @@
-import { Box, IconButton, Typography } from "@mui/material";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import { Instagram, Twitter, Facebook } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const socials = [
+  {
+    label: "Instagram",
+    href: "#",
+    icon: Instagram,
+  },
+  {
+    label: "X",
+    href: "https://x.com/your-account",
+    icon: Twitter,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/your-account",
+    icon: Facebook,
+  },
+];
 
 export default function SocialLinks() {
-  const socials = [
-    {
-      label: "Instagram",
-      href: "#",
-      icon: <InstagramIcon fontSize="large" />,
-    },
-    {
-      label: "X",
-      href: "https://x.com/your-account",
-      icon: <TwitterIcon fontSize="large" />,
-    },
-    {
-      label: "Facebook",
-      href: "https://www.facebook.com/your-account",
-      icon: <FacebookIcon fontSize="large" />,
-    },
-  ];
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        gap: 3,
-      }}
-    >
-      {socials.map((s) => (
-        <Box
-          key={s.label}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 0.5,
-            mt: 2,
-          }}
+    <div className="flex justify-center gap-6 mt-2">
+      {socials.map(({ label, href, icon: Icon }) => (
+        <a
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className={cn(
+            "group flex flex-col items-center gap-1",
+            "text-muted-foreground hover:text-foreground",
+            "transition-colors duration-200",
+          )}
         >
-          <IconButton
-            component="a"
-            href={s.href}
-            target="_blank"
-            aria-label={s.label}
-            color="inherit"
-            className="color-foreground"
+          <div
+            className={cn(
+              "w-11 h-11 rounded-2xl border border-border bg-card flex items-center justify-center shadow-sm",
+              "group-hover:border-primary/40 group-hover:shadow-md group-hover:-translate-y-0.5",
+              "transition-all duration-300",
+            )}
           >
-            {s.icon}
-          </IconButton>
-          <Typography variant="caption">{s.label}</Typography>
-        </Box>
+            <Icon size={20} />
+          </div>
+          <span className="text-xs">{label}</span>
+        </a>
       ))}
-    </Box>
+    </div>
   );
 }

@@ -1,48 +1,17 @@
-"use client";
-
-import { Box } from "@mui/material";
 import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   left: ReactNode;
   right: ReactNode;
-  reverse?: boolean; // 交互レイアウト用
+  reverse?: boolean;
 };
 
 export default function SectionSplit({ left, right, reverse = false }: Props) {
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr",
-          md: "1fr 1fr",
-        },
-        gap: { xs: 4, md: 8 },
-        alignItems: "center",
-      }}
-    >
-      <Box
-        sx={{
-          order: {
-            xs: 1,
-            md: reverse ? 2 : 1,
-          },
-        }}
-      >
-        {left}
-      </Box>
-
-      <Box
-        sx={{
-          order: {
-            xs: 2,
-            md: reverse ? 1 : 2,
-          },
-        }}
-      >
-        {right}
-      </Box>
-    </Box>
+    <div className="grid gap-10 md:grid-cols-2 md:gap-16 items-center">
+      <div className={cn(reverse ? "md:order-2" : "md:order-1")}>{left}</div>
+      <div className={cn(reverse ? "md:order-1" : "md:order-2")}>{right}</div>
+    </div>
   );
 }

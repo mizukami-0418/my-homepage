@@ -1,57 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SimpleHeader() {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    const html = document.documentElement;
-    html.classList.toggle("dark", isDark);
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark((prev) => {
-      const next = !prev;
-      localStorage.setItem("theme", next ? "dark" : "light");
-      return next;
-    });
-  };
-
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/images/corporate-logo.png"
-            alt="logo"
-            width={64}
-            height={64}
-          />
-          <span className="font-bold font-script text-3xl">
-            tomo Web Studio
-          </span>
-        </Link>
+        <Logo />
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          <button
-            onClick={toggleTheme}
-            className="cursor-pointer rounded-full p-2 transition hover:bg-muted focus:outline-none focus-visible:ring"
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? "☀️" : "🌙"}
-          </button>
+          <ThemeToggle />
         </nav>
 
         {/* Mobile */}
         <div className="md:hidden flex items-center gap-3">
-          <button onClick={toggleTheme}>{isDark ? "☀️" : "🌙"}</button>
+          <ThemeToggle />
         </div>
       </div>
     </header>

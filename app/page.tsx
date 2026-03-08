@@ -1,3 +1,37 @@
+// import HeroSection from "./components/hero/HeroSection";
+// import ProblemsSection from "./components/problems/ProblemsSection";
+// import ServicesSection from "./components/services/ServicesSection";
+// import StrengthsSection from "./components/strengths/StrengthsSection";
+// import WorksSection from "./components/works/WorksSection";
+// import PricingSection from "./components/pricing/PricingSection";
+// import AboutSection from "./components/about/AboutSection";
+// import ContactSection from "./components/contact/ContactSection";
+// import { Container } from "@mui/material";
+// import { BlogLink } from "./components/blog/BlogLink";
+// import { TargetAudienceSection } from "./components/audience/TargetAudienceSection";
+
+// export default function HomePage() {
+//   return (
+//     <main className="space-y-24">
+//       <HeroSection />
+//       <Container
+//         maxWidth="lg"
+//         sx={{ display: "flex", flexDirection: "column", gap: 12 }}
+//       >
+//         <TargetAudienceSection />
+//         <ProblemsSection />
+//         <AboutSection />
+//         <ServicesSection />
+//         <StrengthsSection />
+//         <WorksSection />
+//         <PricingSection />
+//         <BlogLink />
+//         <ContactSection />
+//       </Container>
+//     </main>
+//   );
+// }
+
 import HeroSection from "./components/hero/HeroSection";
 import ProblemsSection from "./components/problems/ProblemsSection";
 import ServicesSection from "./components/services/ServicesSection";
@@ -6,28 +40,22 @@ import WorksSection from "./components/works/WorksSection";
 import PricingSection from "./components/pricing/PricingSection";
 import AboutSection from "./components/about/AboutSection";
 import ContactSection from "./components/contact/ContactSection";
-import { Container } from "@mui/material";
 import { BlogLink } from "./components/blog/BlogLink";
 import { TargetAudienceSection } from "./components/audience/TargetAudienceSection";
 
 export default function HomePage() {
   return (
-    <main className="space-y-24">
+    <main>
       <HeroSection />
-      <Container
-        maxWidth="lg"
-        sx={{ display: "flex", flexDirection: "column", gap: 12 }}
-      >
-        <TargetAudienceSection />
-        <ProblemsSection />
-        <AboutSection />
-        <ServicesSection />
-        <StrengthsSection />
-        <WorksSection />
-        <PricingSection />
-        <BlogLink />
-        <ContactSection />
-      </Container>
+      <TargetAudienceSection />
+      <ProblemsSection />
+      <AboutSection />
+      <ServicesSection />
+      <StrengthsSection />
+      <WorksSection />
+      <PricingSection />
+      <BlogLink />
+      <ContactSection />
     </main>
   );
 }

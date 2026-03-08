@@ -7,18 +7,15 @@ import { ReactNode } from "react";
 import { SimpleHeader } from "@/app/components/common/SimpleHeader";
 import { SimpleFooter } from "@/app/components/common/SimpleFooter";
 
+const SIMPLE_LAYOUT_PATHS = ["/blog", "/privacy", "/workflow", "/terms", "/contact"];
+
 export default function BlogLayoutWrapper({
   children,
 }: {
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const isBlog = pathname.startsWith("/blog");
-  const isPrivacy = pathname.startsWith("/privacy");
-  const isWorkflow = pathname.startsWith("/workflow");
-  const isTerms = pathname.startsWith("/terms");
-  const isContact = pathname.startsWith("/contact");
-  const isSimple = isBlog || isPrivacy || isTerms || isWorkflow || isContact;
+  const isSimple = SIMPLE_LAYOUT_PATHS.some(path => pathname.startsWith(path));
 
   return (
     <>

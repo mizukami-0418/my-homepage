@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardActionArea,
-  Typography,
-  Chip,
-  Stack,
-} from "@mui/material";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import type { BlogArticle } from "@/types/blog";
+import { cn } from "@/lib/utils";
 
 type Props = {
   article: BlogArticle;
@@ -17,91 +9,64 @@ type Props = {
 
 export default function BlogCard({ article }: Props) {
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        borderColor: "var(--foreground)",
-        backgroundColor: "var(--background)",
-        transition: "all 0.25s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-        },
-      }}
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "group flex flex-col rounded-3xl border border-border bg-card p-5 shadow-sm",
+        "hover:shadow-lg hover:-translate-y-1 hover:border-primary/30",
+        "transition-all duration-300",
+      )}
     >
-      <CardActionArea
-        href={article.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={{
-          justifyContent: "flex-start",
-          alignItems: "stretch",
-        }}
-      >
-        <CardContent sx={{ p: 3, display: "flex", flexDirection: "column" }}>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            gutterBottom
-            sx={{ color: "var(--foreground)" }}
-          >
-            {article.title}
-          </Typography>
+      {/* タイトル */}
+      <h3 className="font-bold text-sm text-foreground leading-snug mb-3 group-hover:text-primary transition-colors duration-200">
+        {article.title}
+      </h3>
 
-          <Stack
-            direction="row"
-            spacing={1}
-            flexWrap="wrap"
-            useFlexGap
-            sx={{ mb: 2 }}
+      {/* タグ */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {article.tags.map((tag) => (
+          <span
+            key={tag}
+            className="text-xs px-2.5 py-0.5 rounded-full border border-border bg-muted text-muted-foreground"
           >
-            {article.tags.map((tag) => (
-              <Chip
-                key={tag}
-                label={tag}
-                size="small"
-                variant="outlined"
-                sx={{
-                  color: "var(--foreground)",
-                  borderColor: "var(--foreground)",
-                  opacity: 0.7,
-                }}
-              />
-            ))}
-          </Stack>
+            {tag}
+          </span>
+        ))}
+      </div>
 
-          <Stack
-            direction="row"
-            alignItems="center"
-            spacing={0.5}
-            sx={{ width: "100%" }}
+      {/* フッター */}
+      <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground">
+        <div className="flex items-center gap-3">
+          <span>
+            {new Date(article.created_at).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+          <span className="flex items-center gap-1">
+            ❤️ {article.likes_count}
+          </span>
+        </div>
+        <span className="flex items-center gap-1 text-primary/70 group-hover:text-primary transition-colors duration-200">
+          Qiitaで読む
+          <svg
+            className="w-3 h-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <Typography variant="body2" sx={{ color: "var(--foreground)" }}>
-              {new Date(article.created_at).toLocaleDateString("ja-JP", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </Typography>
-            <Typography variant="body2" sx={{ color: "var(--foreground)" }}>
-              ❤️ {article.likes_count}
-            </Typography>
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={0.5}
-              sx={{ pl: 16, color: "var(--foreground)" }}
-            >
-              <Typography variant="caption">Qiita で読む</Typography>
-              <OpenInNewIcon
-                sx={{
-                  fontSize: 14,
-                }}
-              />
-            </Stack>
-          </Stack>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+        </span>
+      </div>
+    </a>
   );
 }

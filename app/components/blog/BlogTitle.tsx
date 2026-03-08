@@ -1,45 +1,23 @@
 "use client";
 
-import { Box, Typography, useTheme } from "@mui/material";
-
 export function BlogTitle() {
-  const theme = useTheme();
-
   return (
-    <Box
-      component="section"
-      sx={{
-        textAlign: "center",
-        py: { xs: 8, md: 12 },
-      }}
-    >
-      {/* Main Title */}
-      <Typography
-        variant="h2"
-        component="h1"
-        fontWeight="bold"
-        sx={{
-          mb: 2,
-          background: `linear-gradient(
-            90deg,
-            ${theme.palette.primary.main},
-            ${theme.palette.secondary.main}
-          )`,
+    <section className="text-center py-16 md:py-20">
+      <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+        Blog
+      </p>
+      <h1
+        className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent mb-3"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, var(--primary), hsl(var(--primary) / 0.5))",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}
       >
         tomo Qiita Articles
-      </Typography>
-
-      {/* Subtitle */}
-      <Typography
-        variant="h6"
-        component="p"
-        sx={{ color: "var(--foreground)" }}
-      >
-        Qiita技術記事まとめ
-      </Typography>
-    </Box>
+      </h1>
+      <p className="text-base text-muted-foreground">Qiita 技術記事まとめ</p>
+    </section>
   );
 }

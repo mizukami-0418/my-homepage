@@ -1,5 +1,3 @@
-// components/Works/worksData.ts
-
 export type Work = {
   title: string;
   description: string;
@@ -18,7 +16,18 @@ export const works: Work[] = [
       "学習ステータス管理",
       "レスポンシブ対応",
     ],
-    techs: ["Python", "Django", "Heroku", "PostgreSQL"],
+    techs: [
+      "Python",
+      "Django",
+      "Heroku",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Django REST Framework",
+      "Vercel",
+    ],
     demo: "https://flashcard.toamoku.net",
   },
   {

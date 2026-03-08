@@ -1,5 +1,5 @@
-import { Box, Typography, Button } from "@mui/material";
 import { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   title: string;
@@ -17,29 +17,38 @@ export default function SectionText({
   actions,
 }: Props) {
   return (
-    <Box>
-      <Typography variant="h5" fontWeight="bold" gutterBottom>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold tracking-tight text-foreground">
         {title}
-      </Typography>
+      </h2>
 
-      {description?.map((text, index) => (
-        <Typography key={index} mb={2}>
+      {description?.map((text, i) => (
+        <p key={i} className="text-sm text-muted-foreground leading-relaxed">
           {text}
-        </Typography>
+        </p>
       ))}
 
       {list && (
-        <Box component="ul" sx={{ pl: 2 }}>
+        <ul className="space-y-2">
           {list.map((item) => (
-            <li key={item}>
-              <Typography>・{item}</Typography>
+            <li
+              key={item}
+              className="flex items-start gap-2 text-sm text-foreground/80"
+            >
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+              {item}
             </li>
           ))}
-        </Box>
+        </ul>
       )}
 
-      {buttonLabel && <Button variant="contained">{buttonLabel}</Button>}
-      {actions && <div className="pt-4">{actions}</div>}
-    </Box>
+      {buttonLabel && (
+        <Button variant="default" size="sm">
+          {buttonLabel}
+        </Button>
+      )}
+
+      {actions && <div className="pt-2">{actions}</div>}
+    </div>
   );
 }

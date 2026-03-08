@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import Image from "next/image";
 
 type Props = {
@@ -8,25 +7,8 @@ type Props = {
 
 export default function SectionImage({ src, alt }: Props) {
   return (
-    <Box
-      sx={{
-        width: "100%",
-        borderRadius: 3,
-        overflow: "hidden",
-        boxShadow: 3,
-      }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={800}
-        height={600}
-        style={{
-          width: "100%",
-          height: "auto",
-          display: "block",
-        }}
-      />
-    </Box>
+    <div className="relative w-full rounded-3xl overflow-hidden shadow-xl aspect-4/3">
+      <Image src={src} alt={alt} fill className="object-cover" />
+    </div>
   );
 }

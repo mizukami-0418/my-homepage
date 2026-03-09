@@ -4,7 +4,7 @@ import "./globals.css";
 import BlogLayoutWrapper from "./LayoutWrapper";
 import { cn } from "@/lib/utils";
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +24,23 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   title: "tomo Web Studio",
   description: "フリーランスWebデベロッパー、tomoのポートフォリオサイト",
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: "tomo Web Studio",
+    template: "%s | tomo Web Studio",
+  },
+  description: "個人事業主・フリーランスのためのやさしいWeb制作",
+  openGraph: {
+    title: "tomo Web Studio",
+    description: "個人事業主・フリーランスのためのやさしいWeb制作",
+    url: "https://tomo-web-studio.toamoku.net",
+    siteName: "tomo Web Studio",
+    images: [{ url: "/images/hero-bg1.jpg" }],
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

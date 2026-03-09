@@ -22,11 +22,6 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "tomo Web Studio",
-  description: "フリーランスWebデベロッパー、tomoのポートフォリオサイト",
-};
-
-export const metadata: Metadata = {
   title: {
     default: "tomo Web Studio",
     template: "%s | tomo Web Studio",

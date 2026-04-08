@@ -1,5 +1,11 @@
-import { Instagram, Twitter, Facebook } from "lucide-react";
+import { Instagram, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const LineIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.12 2 11.2c0 3.13 1.66 5.9 4.24 7.65-.17.63-.62 2.27-.71 2.62-.11.43.16.42.34.31.14-.09 2.26-1.52 3.18-2.14.63.09 1.28.14 1.95.14 5.52 0 10-4.12 10-9.2S17.52 2 12 2z" />
+  </svg>
+);
 
 const socials = [
   {
@@ -13,9 +19,9 @@ const socials = [
     icon: Twitter,
   },
   {
-    label: "Facebook",
-    href: "https://www.facebook.com/your-account",
-    icon: Facebook,
+    label: "LINE",
+    href: "https://line.me/ti/p/~tomo-web-studio",
+    icon: LineIcon,
   },
 ];
 

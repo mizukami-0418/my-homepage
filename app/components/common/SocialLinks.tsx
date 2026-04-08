@@ -9,7 +9,7 @@ const socials = [
   },
   {
     label: "X",
-    href: "https://x.com/your-account",
+    href: "https://x.com/tomoWebStudio",
     icon: Twitter,
   },
   {

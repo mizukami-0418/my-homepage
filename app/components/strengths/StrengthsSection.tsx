@@ -26,8 +26,9 @@
 
 "use client";
 
-import { useCallback, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useReveal } from "@/app/hooks/useReveal";
 
 const strengths = [
   {
@@ -67,24 +68,6 @@ const strengths = [
   },
 ];
 
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
-
 export default function StrengthsSection() {
   const titleReveal = useReveal();
   const cardsReveal = useReveal();
@@ -118,7 +101,7 @@ export default function StrengthsSection() {
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
         <div
-          ref={titleReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={titleReveal.ref}
           className={cn(
             "text-center mb-12 transition-all duration-700 ease-out",
             titleReveal.visible
@@ -139,7 +122,7 @@ export default function StrengthsSection() {
 
         {/* ── カードスライダー ── */}
         <div
-          ref={cardsReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={cardsReveal.ref}
           className={cn(
             "transition-all duration-700 ease-out",
             cardsReveal.visible

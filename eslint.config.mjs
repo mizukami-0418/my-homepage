@@ -13,6 +13,12 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // useRef を JSX の ref prop に渡すパターンを誤検知するため無効化
+      "react-hooks/refs": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

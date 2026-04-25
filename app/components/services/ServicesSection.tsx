@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useReveal } from "@/app/hooks/useReveal";
 
 type Service = {
   title: string;
@@ -101,24 +102,6 @@ const services: Service[] = [
   },
 ];
 
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
-
 export default function ServicesSection() {
   const titleReveal = useReveal();
   const cardsReveal = useReveal();
@@ -150,7 +133,7 @@ export default function ServicesSection() {
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
         <div
-          ref={titleReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={titleReveal.ref}
           className={cn(
             "text-center mb-12 transition-all duration-700 ease-out",
             titleReveal.visible
@@ -171,7 +154,7 @@ export default function ServicesSection() {
 
         {/* ── カードスライダー ── */}
         <div
-          ref={cardsReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={cardsReveal.ref}
           className={cn(
             "transition-all duration-700 ease-out",
             cardsReveal.visible

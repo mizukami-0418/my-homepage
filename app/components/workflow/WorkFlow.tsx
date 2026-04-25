@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useReveal } from "@/app/hooks/useReveal";
 
 type Step = {
   step: number;
@@ -43,24 +43,6 @@ const steps: Step[] = [
   },
 ];
 
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
-
 export function WorkflowSection() {
   const titleReveal = useReveal();
   const stepsReveal = useReveal();
@@ -90,7 +72,7 @@ export function WorkflowSection() {
         <div className="mx-auto max-w-5xl">
           {/* タイトル */}
           <div
-            ref={titleReveal.ref as (el: HTMLDivElement | null) => void}
+            ref={titleReveal.ref}
             className={cn(
               "text-center mb-14 transition-all duration-700 ease-out",
               titleReveal.visible
@@ -105,7 +87,7 @@ export function WorkflowSection() {
 
           {/* ステップ */}
           <div
-            ref={stepsReveal.ref as (el: HTMLDivElement | null) => void}
+            ref={stepsReveal.ref}
             className="grid gap-6 md:grid-cols-2"
           >
             {steps.map((step, i) => (
@@ -167,7 +149,7 @@ export function WorkflowSection() {
 
           {/* フッター */}
           <div
-            ref={footerReveal.ref as (el: HTMLDivElement | null) => void}
+            ref={footerReveal.ref}
             className={cn(
               "mt-16 text-center transition-all duration-700 ease-out",
               footerReveal.visible

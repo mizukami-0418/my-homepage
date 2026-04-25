@@ -94,10 +94,10 @@
 
 "use client";
 
-import { useCallback, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useReveal } from "@/app/hooks/useReveal";
 
 const AUDIENCE_ITEMS = [
   "はじめてホームページを作ろうと考えている方",
@@ -126,32 +126,11 @@ const SERVICES = [
   },
 ];
 
-// React 19対応: コールバックrefでIntersectionObserverを設定
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-
-  const ref = useCallback((el: HTMLDivElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(el);
-  }, []);
-
-  return { ref, visible };
-}
-
 export function TargetAudienceSection() {
-  const titleReveal = useReveal();
-  const serviceReveal = useReveal();
-  const cardReveal = useReveal();
-  const footerReveal = useReveal();
+  const titleReveal = useReveal(0.15);
+  const serviceReveal = useReveal(0.15);
+  const cardReveal = useReveal(0.15);
+  const footerReveal = useReveal(0.15);
 
   return (
     <section className="bg-background py-20 px-4">

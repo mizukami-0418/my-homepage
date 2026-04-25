@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useReveal } from "@/app/hooks/useReveal";
 
 const plans = [
   {
@@ -70,24 +70,6 @@ const options = [
   { label: "既存サイトの改修・修正", price: "¥ 10,000〜" },
 ];
 
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
-
 export default function PricingSection() {
   const titleReveal = useReveal();
   const cardsReveal = useReveal();
@@ -98,7 +80,7 @@ export default function PricingSection() {
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
         <div
-          ref={titleReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={titleReveal.ref}
           className={cn(
             "text-center mb-14 transition-all duration-700 ease-out",
             titleReveal.visible
@@ -121,7 +103,7 @@ export default function PricingSection() {
 
         {/* ── 料金カード ── */}
         <div
-          ref={cardsReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={cardsReveal.ref}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {plans.map((plan, i) => (
@@ -207,7 +189,7 @@ export default function PricingSection() {
 
         {/* ── オプション ── */}
         <div
-          ref={optionReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={optionReveal.ref}
           className={cn(
             "mt-16 transition-all duration-700 ease-out",
             optionReveal.visible

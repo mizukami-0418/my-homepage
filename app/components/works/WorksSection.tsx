@@ -1,27 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { works } from "./worksData";
-
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
+import { useReveal } from "@/app/hooks/useReveal";
 
 export default function WorksSection() {
   const titleReveal = useReveal();
@@ -32,7 +14,7 @@ export default function WorksSection() {
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
         <div
-          ref={titleReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={titleReveal.ref}
           className={cn(
             "text-center mb-14 transition-all duration-700 ease-out",
             titleReveal.visible
@@ -53,7 +35,7 @@ export default function WorksSection() {
 
         {/* ── カードグリッド ── */}
         <div
-          ref={cardsReveal.ref as (el: HTMLDivElement | null) => void}
+          ref={cardsReveal.ref}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {works.map((work, i) => (

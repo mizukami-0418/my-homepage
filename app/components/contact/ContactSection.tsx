@@ -1,27 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    observer.observe(el);
-  }, []);
-  return { ref, visible };
-}
+import { useReveal } from "@/app/hooks/useReveal";
 
 const reassurances = [
   { icon: "💬", text: "ご相談だけでも大歓迎です" },
@@ -30,12 +12,12 @@ const reassurances = [
 ];
 
 export default function ContactSection() {
-  const reveal = useReveal();
+  const reveal = useReveal(0.2);
 
   return (
     <section id="contact" className="overflow-hidden bg-background py-20 px-4">
       <div
-        ref={reveal.ref as (el: HTMLDivElement | null) => void}
+        ref={reveal.ref}
         className="mx-auto max-w-2xl"
       >
         {/* ── タイトル ── */}

@@ -1,28 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-function useReveal() {
-  const [visible, setVisible] = useState(false);
-
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(el);
-  }, []);
-
-  return { ref, visible };
-}
+import { useReveal } from "@/app/hooks/useReveal";
 
 const descriptions = [
   "tomo ― 友達のように、共に歩む Web スタジオ",
@@ -32,8 +12,8 @@ const descriptions = [
 ];
 
 export default function AboutSection() {
-  const leftReveal = useReveal();
-  const rightReveal = useReveal();
+  const leftReveal = useReveal(0.15);
+  const rightReveal = useReveal(0.15);
 
   return (
     <section id="about" className="overflow-hidden bg-background py-20 px-4">
@@ -41,7 +21,7 @@ export default function AboutSection() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* ── 左：画像（左からスライドイン） ── */}
           <div
-            ref={leftReveal.ref as (el: HTMLDivElement | null) => void}
+            ref={leftReveal.ref}
             className={cn(
               "transition-all duration-700 ease-out",
               leftReveal.visible
@@ -63,7 +43,7 @@ export default function AboutSection() {
 
           {/* ── 右：テキスト（右からスライドイン） ── */}
           <div
-            ref={rightReveal.ref as (el: HTMLDivElement | null) => void}
+            ref={rightReveal.ref}
             className={cn(
               "transition-all duration-700 ease-out delay-200",
               rightReveal.visible

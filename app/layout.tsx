@@ -22,6 +22,7 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tomo-web-studio.toamoku.net"),
   title: {
     default: "tomo Web Studio",
     template: "%s | tomo Web Studio",

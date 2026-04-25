@@ -1,11 +1,50 @@
 "use server";
 
+import { headers } from "next/headers";
 import { supabase } from "@/app/lib/supabase";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1時間
+
+async function checkRateLimit(ip: string): Promise<boolean> {
+  const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
+
+  const { count } = await supabase
+    .from("contact_rate_limits")
+    .select("*", { count: "exact", head: true })
+    .eq("ip", ip)
+    .gte("created_at", windowStart);
+
+  return (count ?? 0) < RATE_LIMIT_MAX;
+}
+
+async function recordRequest(ip: string): Promise<void> {
+  await supabase.from("contact_rate_limits").insert({ ip });
+
+  // 24時間以上前の古いレコードを削除
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  await supabase
+    .from("contact_rate_limits")
+    .delete()
+    .lt("created_at", oneDayAgo);
+}
+
 export async function submitContact(formData: FormData) {
+  const headersList = await headers();
+  const ip =
+    headersList.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+
+  const allowed = await checkRateLimit(ip);
+  if (!allowed) {
+    return {
+      success: false,
+      error: "送信回数の上限に達しました。1時間後に再度お試しください。",
+    };
+  }
+
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const message = formData.get("message") as string;
@@ -13,6 +52,8 @@ export async function submitContact(formData: FormData) {
   if (!name || !email || !message) {
     return { success: false, error: "必須項目が未入力です" };
   }
+
+  await recordRequest(ip);
 
   // ① Supabaseに保存
   const { error } = await supabase.from("contacts").insert({

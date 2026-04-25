@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useReveal } from "@/app/hooks/useReveal";
+import { SectionTitle } from "@/app/components/common/SectionTitle";
 
 type Service = {
   title: string;
@@ -132,25 +133,13 @@ export default function ServicesSection() {
     <section id="services" className="overflow-hidden bg-background py-20 px-4">
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
-        <div
-          ref={titleReveal.ref}
-          className={cn(
-            "text-center mb-12 transition-all duration-700 ease-out",
-            titleReveal.visible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10",
-          )}
-        >
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
-            Services
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            提供サービス
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Web制作からデザイン・開発・サポートまで、ワンストップでお任せください。
-          </p>
-        </div>
+        <SectionTitle
+          reveal={titleReveal}
+          label="Services"
+          title="提供サービス"
+          description="Web制作からデザイン・開発・サポートまで、ワンストップでお任せください。"
+          className="mb-12"
+        />
 
         {/* ── カードスライダー ── */}
         <div

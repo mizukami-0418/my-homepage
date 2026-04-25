@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { works } from "./worksData";
 import { useReveal } from "@/app/hooks/useReveal";
+import { SectionTitle } from "@/app/components/common/SectionTitle";
 
 export default function WorksSection() {
   const titleReveal = useReveal();
@@ -13,25 +14,13 @@ export default function WorksSection() {
     <section id="works" className="overflow-hidden bg-background py-20 px-4">
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
-        <div
-          ref={titleReveal.ref}
-          className={cn(
-            "text-center mb-14 transition-all duration-700 ease-out",
-            titleReveal.visible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8",
-          )}
-        >
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
-            Works
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            制作実績
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            これまでに手がけた作品の一部をご紹介します。
-          </p>
-        </div>
+        <SectionTitle
+          reveal={titleReveal}
+          label="Works"
+          title="制作実績"
+          description="これまでに手がけた作品の一部をご紹介します。"
+          className="mb-14"
+        />
 
         {/* ── カードグリッド ── */}
         <div

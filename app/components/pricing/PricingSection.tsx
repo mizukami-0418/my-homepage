@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useReveal } from "@/app/hooks/useReveal";
+import { SectionTitle } from "@/app/components/common/SectionTitle";
 
 const plans = [
   {
@@ -79,27 +80,13 @@ export default function PricingSection() {
     <section id="price" className="overflow-hidden bg-background py-20 px-4">
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
-        <div
-          ref={titleReveal.ref}
-          className={cn(
-            "text-center mb-14 transition-all duration-700 ease-out",
-            titleReveal.visible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8",
-          )}
-        >
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
-            Pricing
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            料金目安
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            個人スタジオだからできる、リーズナブルな価格設定。
-            <br />
-            事前に必ずお見積りをご提示しますので、安心してご相談ください。
-          </p>
-        </div>
+        <SectionTitle
+          reveal={titleReveal}
+          label="Pricing"
+          title="料金目安"
+          description={<>個人スタジオだからできる、リーズナブルな価格設定。<br />事前に必ずお見積りをご提示しますので、安心してご相談ください。</>}
+          className="mb-14"
+        />
 
         {/* ── 料金カード ── */}
         <div

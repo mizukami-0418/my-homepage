@@ -98,6 +98,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/app/hooks/useReveal";
+import { SectionTitle } from "@/app/components/common/SectionTitle";
 
 const AUDIENCE_ITEMS = [
   "はじめてホームページを作ろうと考えている方",
@@ -136,25 +137,13 @@ export function TargetAudienceSection() {
     <section className="bg-background py-20 px-4">
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
-        <div
-          ref={titleReveal.ref}
-          className={cn(
-            "text-center mb-14 transition-all duration-700",
-            titleReveal.visible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8",
-          )}
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            こんな方に、ぴったりです
-          </h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            ホームページを作りたいと思っても、
-            <br className="hidden sm:block" />
-            「何から始めればいいのか分からない」
-            そんな不安を感じている方も多いのではないでしょうか。
-          </p>
-        </div>
+        <SectionTitle
+          reveal={titleReveal}
+          title="こんな方に、ぴったりです"
+          description={<>ホームページを作りたいと思っても、<br className="hidden sm:block" />「何から始めればいいのか分からない」そんな不安を感じている方も多いのではないでしょうか。</>}
+          className="mb-14"
+          descriptionClassName="mt-4 leading-relaxed"
+        />
 
         {/* ── サービスバッジ ── */}
         <div

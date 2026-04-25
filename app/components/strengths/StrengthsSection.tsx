@@ -29,6 +29,7 @@
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/app/hooks/useReveal";
+import { SectionTitle } from "@/app/components/common/SectionTitle";
 
 const strengths = [
   {
@@ -100,25 +101,13 @@ export default function StrengthsSection() {
     >
       <div className="mx-auto max-w-5xl">
         {/* ── タイトル ── */}
-        <div
-          ref={titleReveal.ref}
-          className={cn(
-            "text-center mb-12 transition-all duration-700 ease-out",
-            titleReveal.visible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8",
-          )}
-        >
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
-            Strengths
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
-            選ばれる理由
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            小さなスタジオだからこそできる、丁寧さと誠実さをお届けします。
-          </p>
-        </div>
+        <SectionTitle
+          reveal={titleReveal}
+          label="Strengths"
+          title="選ばれる理由"
+          description="小さなスタジオだからこそできる、丁寧さと誠実さをお届けします。"
+          className="mb-12"
+        />
 
         {/* ── カードスライダー ── */}
         <div

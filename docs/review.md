@@ -1,6 +1,6 @@
 # プロジェクトレビュー
 
-作成日: 2026-04-26  
+作成日: 2026-04-26
 対象ブランチ: main
 
 ---
@@ -9,21 +9,23 @@
 
 ### SEC-001 🔴高 メールテンプレートへの HTML インジェクション
 
-- [ ] **SEC-001** — `app/actions/contact.ts:72,91` — ユーザー入力の `name`・`message`・`email` を HTML テンプレートにエスケープなしで直接埋め込んでいる。悪意あるユーザーが `<script>` タグや HTML タグを送信すると、管理者が受信するメール内で任意の HTML が実行・レンダリングされる。
+- [x] **SEC-001** — `app/actions/contact.ts:72,91` — ユーザー入力の `name`・`message`・`email` を HTML テンプレートにエスケープなしで直接埋め込んでいる。悪意あるユーザーが `<script>` タグや HTML タグを送信すると、管理者が受信するメール内で任意の HTML が実行・レンダリングされる。
 
-  ```ts
-  // 現状（危険）
-  html: `<p>${name} 様</p><p>${message.replace(/\n/g, "<br />")}</p>`
+  `// 現状（危険）
+html:`<p>${name} 様</p><p>${message.replace(/\n/g, "<br />")}</p>`
 
   // 修正案
   const escape = (s: string) =>
-    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   html: `<p>${escape(name)} 様</p><p>${escape(message).replace(/\n/g, "<br />")}</p>`
+
+  ```
+
   ```
 
 ### SEC-002 🔴高 メール送信エラーを無視して `success: true` を返す
 
-- [ ] **SEC-002** — `app/actions/contact.ts:68-95` — Resend でのメール送信（自動返信・管理者通知）の結果を一切チェックしていない。送信が失敗してもユーザーには「送信完了」と表示されてしまう。
+- [x] **SEC-002** — `app/actions/contact.ts:68-95` — Resend でのメール送信（自動返信・管理者通知）の結果を一切チェックしていない。送信が失敗してもユーザーには「送信完了」と表示されてしまう。
 
   ```ts
   // 修正案
@@ -48,7 +50,10 @@
 - [ ] **SEC-004** — `app/lib/supabase.ts:3-6` — `NEXT_PUBLIC_SUPABASE_URL!` と `SUPABASE_SERVICE_ROLE_KEY!` に非 null アサーションを使用しているが、未設定時のエラーが不明瞭。また `SUPABASE_SERVICE_ROLE_KEY` はサーバー専用キーであり、このファイルが誤ってクライアントバンドルに含まれないよう注意が必要（現状は Server Action 経由のみで使用されており問題なし）。
 
   ```ts
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.SUPABASE_SERVICE_ROLE_KEY
+  ) {
     throw new Error("Supabase 環境変数が未設定です");
   }
   ```
@@ -167,25 +172,58 @@
 
 ---
 
+## リファクタリング
+
+### REF-001 🟢低 アニメーション className の共通化
+
+- [ ] **REF-001** — `app/hooks/useReveal.ts` / 全セクションコンポーネント — `cn("transition-all duration-700 ease-out", visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8")` という3行のパターンが全体で 20 箇所以上コピーされている。`useReveal.ts` に `revealCls.up(visible, distance?)` / `revealCls.right(visible)` / `revealCls.left(visible)` を追加して一元化する。
+
+  ```ts
+  // app/hooks/useReveal.ts に追加
+  export const revealCls = {
+    up:    (visible: boolean, distance: 4|6|8|10|12 = 8) => `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : `opacity-0 translate-y-${distance}`}`,
+    right: (visible: boolean) => `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"}`,
+    left:  (visible: boolean) => `transition-all duration-700 ease-out ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"}`,
+  };
+  ```
+
+### REF-002 🟡中 カードスライダーのスクロールロジック重複
+
+- [ ] **REF-002** — `app/components/services/ServicesSection.tsx` / `app/components/strengths/StrengthsSection.tsx` — 横スクロールカードスライダーの `useRef` + `useState(canScrollLeft/Right)` + `handleScroll` + `scrollBy` ロジックが 2 ファイルで完全に重複している。共通フック `useHorizontalScroll` またはラッパーコンポーネント `CardSlider` に抽出する。
+
+### REF-003 🟢低 Footer / SimpleFooter の統合
+
+- [ ] **REF-003** — `app/components/common/Footer.tsx` / `app/components/common/SimpleFooter.tsx` — 両コンポーネントはほぼ同一の構造で、`max-w-7xl` vs `max-w-4xl` とグリッドのカラム数だけ異なる。`variant` または `maxWidth` prop を持つ単一コンポーネントに統合する。
+
+### REF-004 🟢低 Header / SimpleHeader の統合
+
+- [ ] **REF-004** — `app/components/common/Header.tsx` / `app/components/common/SimpleHeader.tsx` — ロゴ・テーマトグル・ヘッダーラッパーのスタイルが重複している。ナビゲーションの有無を `showNav` prop で切り替える単一コンポーネントに統合する。
+
+---
+
 ## サマリー
 
-| ID | 重要度 | カテゴリ | タイトル |
-|---|---|---|---|
-| SEC-001 | 🔴高 | セキュリティ | メールテンプレートへの HTML インジェクション |
-| SEC-002 | 🔴高 | セキュリティ | メール送信エラーを無視して success: true を返す |
-| SEC-003 | 🟡中 | セキュリティ | ADMIN_EMAIL の非 null アサーション |
-| SEC-004 | 🟡中 | セキュリティ | Supabase 環境変数バリデーション欠如 |
-| SEC-005 | 🟡中 | セキュリティ | CSP ヘッダー未設定 |
-| SEC-006 | 🟡中 | セキュリティ | 個人情報のハードコード |
-| QUA-001 | 🟡中 | コード品質 | Qiita API レスポンスで `any` 型 |
-| QUA-002 | 🟡中 | コード品質 | useReveal のローカル再実装 |
-| QUA-003 | 🟡中 | コード品質 | サーバーアクション呼び出しが try-catch 未保護 |
-| QUA-004 | 🟢低 | コード品質 | 存在しない ESLint ルール名 |
-| QUA-005 | 🟢低 | コード品質 | Qiita エラー時に throw してバウンダリへ委ねる |
-| TST-001 | 🟡中 | テスト | テストが存在しない |
-| PER-001 | 🟡中 | パフォーマンス | Qiita を毎回フェッチ（キャッシュなし） |
-| PER-002 | 🟡中 | パフォーマンス | MUI のバンドル肥大化 |
-| PER-003 | 🟢低 | パフォーマンス | ブログヒーロー画像が Next.js 最適化対象外 |
-| PER-004 | 🟢低 | パフォーマンス | radix-ui の重複依存 |
-| DOC-001 | 🟢低 | ドキュメント | .env.example が存在しない |
-| DOC-002 | 🟢低 | ドキュメント | CLAUDE.md のコンポーネント名が不一致 |
+| ID      | 重要度 | カテゴリ       | タイトル                                        |
+| ------- | ------ | -------------- | ----------------------------------------------- |
+| SEC-001 | 🔴高   | セキュリティ   | メールテンプレートへの HTML インジェクション    |
+| SEC-002 | 🔴高   | セキュリティ   | メール送信エラーを無視して success: true を返す |
+| SEC-003 | 🟡中   | セキュリティ   | ADMIN_EMAIL の非 null アサーション              |
+| SEC-004 | 🟡中   | セキュリティ   | Supabase 環境変数バリデーション欠如             |
+| SEC-005 | 🟡中   | セキュリティ   | CSP ヘッダー未設定                              |
+| SEC-006 | 🟡中   | セキュリティ   | 個人情報のハードコード                          |
+| QUA-001 | 🟡中   | コード品質     | Qiita API レスポンスで `any` 型                 |
+| QUA-002 | 🟡中   | コード品質     | useReveal のローカル再実装                      |
+| QUA-003 | 🟡中   | コード品質     | サーバーアクション呼び出しが try-catch 未保護   |
+| QUA-004 | 🟢低   | コード品質     | 存在しない ESLint ルール名                      |
+| QUA-005 | 🟢低   | コード品質     | Qiita エラー時に throw してバウンダリへ委ねる   |
+| TST-001 | 🟡中   | テスト         | テストが存在しない                              |
+| PER-001 | 🟡中   | パフォーマンス | Qiita を毎回フェッチ（キャッシュなし）          |
+| PER-002 | 🟡中   | パフォーマンス | MUI のバンドル肥大化                            |
+| PER-003 | 🟢低   | パフォーマンス | ブログヒーロー画像が Next.js 最適化対象外       |
+| PER-004 | 🟢低   | パフォーマンス | radix-ui の重複依存                             |
+| DOC-001 | 🟢低   | ドキュメント       | .env.example が存在しない                       |
+| DOC-002 | 🟢低   | ドキュメント       | CLAUDE.md のコンポーネント名が不一致            |
+| REF-001 | 🟢低   | リファクタリング   | アニメーション className の共通化               |
+| REF-002 | 🟡中   | リファクタリング   | カードスライダーのスクロールロジック重複        |
+| REF-003 | 🟢低   | リファクタリング   | Footer / SimpleFooter の統合                    |
+| REF-004 | 🟢低   | リファクタリング   | Header / SimpleHeader の統合                    |

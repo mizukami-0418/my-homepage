@@ -82,10 +82,9 @@ export async function submitContact(formData: FormData) {
   const escapedName = escapeHtml(name);
   const escapedMessage = escapeHtml(message).replace(/\n/g, "<br />");
 
-  await resend.emails.send({
+  const { error: replyError } = await resend.emails.send({
     from: "お問い合わせ <no-reply@mail.toamoku.net>",
     to: email,
-
     subject: "【自動返信】お問い合わせありがとうございます",
     html: `
       <p>${escapedName} 様</p>
@@ -101,10 +100,14 @@ export async function submitContact(formData: FormData) {
     `,
   });
 
+  if (replyError) {
+    return { success: false, error: "メール送信に失敗しました" };
+  }
+
   // ③ 管理者通知（任意だが強い）
   const escapedEmail = escapeHtml(email);
 
-  await resend.emails.send({
+  const { error: adminError } = await resend.emails.send({
     from: "通知 <no-reply@mail.toamoku.net>",
     to: process.env.ADMIN_EMAIL!,
     subject: "【新規お問い合わせ】",
@@ -115,6 +118,10 @@ export async function submitContact(formData: FormData) {
       <p>${escapedMessage}</p>
     `,
   });
+
+  if (adminError) {
+    return { success: false, error: "メール送信に失敗しました" };
+  }
 
   return { success: true };
 }
